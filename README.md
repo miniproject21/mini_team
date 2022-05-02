@@ -1,1 +1,1 @@
-# mini_team
+# mini_team ㅇㅇ

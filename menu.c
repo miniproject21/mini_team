@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <string.h>
 #include "menu.h"
 
 int selectMenu(){
@@ -39,7 +37,7 @@ void listMenu(Menu *s, int count){
     printf("=====================================\n");
     for (int i = 0; i < count; i++){
         if(s[i].time == -1) continue;
-        printf("%d ", i+1) 
+        printf("%d ", i+1);
         readMenu(s[i]); 
         printf("\n");
     }
@@ -81,7 +79,7 @@ void saveData(Menu *s, int count){
         fprintf(fp, "%10s %d %d %10s ", s[i].name, s[i].time, s[i].type, s[i].num);
     }
     fclose(fp); 
-    printf("=> 저장됨! \n";
+    printf("=> 저장됨! \n");
 }
 
 int loadData(Menu *s){
@@ -98,5 +96,24 @@ int loadData(Menu *s){
     fclose(fp); 
     printf("=> 로딩성공!\n");
     return i; 
-    
+
+}
+
+void searchName(Menu *s, int count){
+    int scnt = 0;
+    char search[20];
+
+    printf("검색할 이름?:");
+    scanf("%s", search);
+
+    for(int i=0; i < count; i++){
+        if(s[i].time == -1) continue;
+        if(strstr(s[i].name, search)){  
+            printf("%2d", i+1);
+            readMenu(s[i]);
+            scnt++;
+        }
+    }
+    if(scnt == 0) printf("=> 검색된 데이터 없음!");
+    printf("\n");
 }
